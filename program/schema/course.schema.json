@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "course.schema.json",
+  "title": "Course definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title_ru",
+    "theme",
+    "status",
+    "ros_distro"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Стабильный идентификатор курса (slug). Не менять после публикации."
+    },
+    "title_ru": {
+      "type": "string",
+      "minLength": 3
+    },
+    "title_en": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "foundations",
+        "basic-ros2",
+        "intermediate-ros2",
+        "robotics-theory",
+        "navigation",
+        "perception",
+        "manipulation",
+        "robot-creation",
+        "ai",
+        "testing-debugging",
+        "web",
+        "simulation",
+        "devops",
+        "fleet-enterprise",
+        "industrial"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "in-review",
+        "verified",
+        "published",
+        "deprecated"
+      ],
+      "description": "draft: есть только сырьё; in-review: контент написан, ждёт валидатора; verified: принят валидатором; published: доступен студентам; deprecated: исключён из программы."
+    },
+    "deprecated_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "id курса-предшественника (обычно ROS1-версия)."
+    },
+    "ros_distro": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "humble",
+        "jazzy",
+        "lyrical",
+        null
+      ],
+      "description": "Целевой дистрибутив ROS2. null допустим только для deprecated и теоретических курсов."
+    },
+    "audience": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "student",
+          "engineer",
+          "corporate",
+          "school"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "hours": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "theory": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lab": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "project": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "uniqueItems": true,
+      "description": "Список id курсов-пререквизитов. Валидируется graph.py на существование и отсутствие циклов."
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 10
+      },
+      "description": "Проверяемые результаты обучения. Формулировка: «делает X» (не «понимает X»). На каждый outcome — минимум одно задание."
+    },
+    "labs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "env"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "env": {
+            "type": "string",
+            "enum": [
+              "docker-gazebo",
+              "docker-cli",
+              "cloud",
+              "hardware",
+              "none"
+            ]
+          },
+          "autograded": {
+            "type": "boolean",
+            "default": false
+          },
+          "path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Путь к пакету в labs/"
+          }
+        }
+      }
+    },
+    "hardware": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "none",
+          "limo",
+          "so-arm",
+          "jetson-orin",
+          "turtlebot",
+          "rpi"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "assessment": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "autograded",
+            "project",
+            "autograded+project",
+            "quiz",
+            "none"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Пути к материалам в research/md/. Матрица покрытия строится из этого поля."
+    },
+    "provenance": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Происхождение исходного описания. 'the-construct-catalog' = текст заимствован, обязателен полный рерайт до in-review."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "competencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "uniqueItems": true,
+      "description": "id компетенций из program/competencies.yaml, которые курс формирует."
+    },
+    "migrated": {
+      "type": "boolean",
+      "description": "Служебное: false защищает файл от перегенерации migrate_xlsx.py."
+    },
+    "wave": {
+      "type": ["integer", "null"],
+      "enum": [1, 2, null],
+      "description": "Производственная волна: 1 — первая очередь, 2 — по спросу"
+    }
+  }
+}

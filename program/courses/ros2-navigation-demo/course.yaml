@@ -1,0 +1,31 @@
+id: ros2-navigation-demo
+title_ru: Навигация ROS2 (демо-курс)
+title_en: ROS2 Navigation (demo)
+theme: navigation
+status: in-review
+deprecated_reason: null
+supersedes: null
+ros_distro: jazzy
+audience:
+- engineer
+hours:
+  theory: 4
+  lab: 4
+  project: 0
+prerequisites:
+- ros2-cli-basics
+outcomes:
+- Настраивает costmap и запускает Nav2 для движения к цели
+- Диагностирует зависшую навигацию по дереву восстановления Nav2
+labs: []
+hardware:
+- none
+assessment:
+  type: autograded
+  notes: "Демонстрационный курс для portfolio-репозитория — не реальный каталог."
+materials: []
+provenance: null
+notes: "Фиктивный курс, создан только для демонстрации tools/graph.py (пререквизиты)."
+migrated: false
+competencies: []
+wave: null

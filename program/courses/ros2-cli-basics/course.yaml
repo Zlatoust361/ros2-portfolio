@@ -1,0 +1,30 @@
+id: ros2-cli-basics
+title_ru: Основы командной строки ROS2 (демо-курс)
+title_en: ROS2 CLI Basics (demo)
+theme: basic-ros2
+status: in-review
+deprecated_reason: null
+supersedes: null
+ros_distro: jazzy
+audience:
+- engineer
+hours:
+  theory: 3
+  lab: 2
+  project: 0
+prerequisites: []
+outcomes:
+- Запускает узел и публикует/подписывается на топик через ros2 CLI
+- Диагностирует отсутствие данных в топике через ros2 topic hz/echo
+labs: []
+hardware:
+- none
+assessment:
+  type: autograded
+  notes: "Демонстрационный курс для portfolio-репозитория — не реальный каталог."
+materials: []
+provenance: null
+notes: "Фиктивный курс, создан только для демонстрации tools/graph.py и tools/lint_glossary.py."
+migrated: false
+competencies: []
+wave: null

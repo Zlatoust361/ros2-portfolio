@@ -1,0 +1,31 @@
+id: ros2-manipulation-demo
+title_ru: Манипуляция ROS2 (демо-курс)
+title_en: ROS2 Manipulation (demo)
+theme: manipulation
+status: draft
+deprecated_reason: null
+supersedes: null
+ros_distro: jazzy
+audience:
+- engineer
+hours:
+  theory: 4
+  lab: 4
+  project: 0
+prerequisites:
+- ros2-cli-basics
+- ros2-navigation-demo
+outcomes:
+- Планирует движение манипулятора в сцене с препятствиями
+labs: []
+hardware:
+- none
+assessment:
+  type: autograded
+  notes: "Демонстрационный курс для portfolio-репозитория — не реальный каталог."
+materials: []
+provenance: null
+notes: "Фиктивный курс — показывает граф с двумя пререквизитами одновременно."
+migrated: false
+competencies: []
+wave: null
