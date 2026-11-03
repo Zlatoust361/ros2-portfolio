@@ -1,0 +1,34 @@
+# Манифест синхронизации с источником — см. .portfolio/sync.py и UPDATING.md.
+# Источник: закрытая монорепа ros2-course-git.
+source: ../ros2-course-git
+
+# Зеркалятся только инструменты и схема — они и есть демонстрируемый навык.
+mirror:
+  - tools/check_links.py
+  - tools/graph.py
+  - tools/lint_glossary.py
+  - program/schema/course.schema.json
+
+patched: []
+
+# Принадлежит только портфолио и НЕ синхронизируется намеренно:
+#   program/glossary.yaml           — урезанная демо-версия словаря
+#   program/courses/*/course.yaml   — три ДЕМО-курса с вымышленными названиями
+#   labs/arm-kinematics/            — одна лаба, адаптированная (из labs/basic-arm-kinematics)
+#   research/md/demo-note.md        — заложенное нарушение для линтера
+#   case-studies/, README.md, tools/README.md, LICENSE, .github/, .portfolio/, UPDATING.md
+# Реальный каталог курсов, цены, бренд, sales/ — коммерческий актив, в витрину не попадает.
+
+forbidden:
+  - "\\bруб\\.?\\b|₽"
+  - "прайс|стоимость курса|цена курса"
+  - "the-construct|theconstruct"      # заимствованные тексты публиковать нельзя (CLAUDE.md источника, правило 4)
+  - "\\+7[ (]?\\d{3}"
+  - "@gmail\\.com|@yandex\\.ru|@mail\\.ru"
+
+verify:
+  - "python tools/graph.py"
+  - "python tools/check_links.py"
+  - "python tools/lint_glossary.py --all --report | grep -q 'Нарушений: 1\\.'"
+  - "cd labs/arm-kinematics/solution && ./check.sh"
+  - "cd labs/arm-kinematics && ! ./check.sh > /dev/null 2>&1"

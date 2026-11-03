@@ -58,6 +58,10 @@ CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) делает ров�
 с `TODO` красный, а линтер обязан найти ровно одно специально заложенное
 нарушение в `research/md/demo-note.md` — иначе он не работает.
 
+## Как это обновляется
+
+Из закрытой монорепы зеркалятся только валидаторы и схема ([`.portfolio/sync.py`](.portfolio/sync.py)); демо-данные, лаба и разборы — собственные. Правила — в [`UPDATING.md`](UPDATING.md).
+
 ## Лицензия
 
 MIT — см. [`LICENSE`](LICENSE).
