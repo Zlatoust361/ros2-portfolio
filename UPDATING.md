@@ -14,7 +14,7 @@
 | `tools/graph.py`, `tools/check_links.py`, `tools/lint_glossary.py`, `program/schema/course.schema.json` | тот же путь в источнике, 1:1 | источник |
 | `program/glossary.yaml` | урезан из источника | портфолио (не синхронизируется) |
 | `program/courses/*/course.yaml` | **демо**, вымышленные названия | портфолио |
-| `labs/arm-kinematics/` | адаптирован из `labs/basic-arm-kinematics/` | портфолио |
+| `labs/arm-kinematics/` | адаптирован из лабы basic-arm-kinematics источника | портфолио |
 | `research/md/demo-note.md` | заложенное нарушение для линтера | портфолио |
 | `case-studies/`, README, CI, LICENSE | — | портфолио |
 
@@ -49,7 +49,7 @@ python .portfolio/sync.py verify     # то же, что CI: 3 валидато�
 
 - Из источника — только инструменты и то, что нужно, чтобы они
   **реально запускались** на демо-данных. Не каталог, не контент курсов.
-- Тексты с `provenance: the-construct-catalog` и `research/raw/`
+- Тексты с `provenance: the-construct-catalog` и архив research/raw
   источника — не публикуются ни в каком виде (правило 4 и 8 CLAUDE.md
   источника). Манифест ловит слово, но не перефразирование — читать.
 - Лаба в портфолио = одна, самодостаточная, с численно проверенным
