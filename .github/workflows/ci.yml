@@ -1,0 +1,30 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tools-and-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml jsonschema numpy pytest
+      - name: graph.py — схема, пререквизиты, ацикличность
+        run: python tools/graph.py
+      - name: check_links.py — битые внутренние ссылки
+        run: python tools/check_links.py
+      - name: lint_glossary.py — должен найти ровно одно специально заложенное нарушение
+        run: |
+          python tools/lint_glossary.py --all --report | tee lint.out
+          grep -q "Нарушений: 1\." lint.out
+      - name: Лаба arm-kinematics — эталон зелёный
+        run: cd labs/arm-kinematics/solution && ./check.sh
+      - name: Лаба arm-kinematics — шаблон с TODO красный (так и задумано)
+        run: |
+          cd labs/arm-kinematics
+          if ./check.sh; then echo "шаблон не должен проходить проверку"; exit 1; fi

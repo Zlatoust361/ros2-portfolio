@@ -1,5 +1,8 @@
 # ROS2 course-pipeline portfolio
 
+[![validate](https://github.com/Zlatoust361/ros2-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Zlatoust361/ros2-portfolio/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Это не курс и не продукт — это выдержка из моей работы над содержательным
 и техническим конвейером производства ROS2-курса: несколько самостоятельных
 кусков, каждый демонстрирует конкретный навык, без полного каталога курсов
@@ -49,3 +52,12 @@ cd labs/arm-kinematics
 ./check.sh                          # красный — шаблон с TODO
 cd solution && ./check.sh           # зелёный — эталонное решение
 ```
+
+CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) делает ровно
+то же самое на каждый push: три валидатора, эталон лабы зелёный, шаблон
+с `TODO` красный, а линтер обязан найти ровно одно специально заложенное
+нарушение в `research/md/demo-note.md` — иначе он не работает.
+
+## Лицензия
+
+MIT — см. [`LICENSE`](LICENSE).
